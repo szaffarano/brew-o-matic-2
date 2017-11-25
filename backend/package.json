@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "BoM-Backend",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -7,11 +7,14 @@
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "compression": "^1.7.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "helmet": "^3.9.0",
+    "helmet-crossdomain": "^0.1.0",
     "morgan": "~1.9.0",
-    "pug": "2.0.0-beta11",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "winston": "^2.4.0"
   }
 }

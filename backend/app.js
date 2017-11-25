@@ -1,39 +1,60 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const favicon = require('serve-favicon');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const compression = require('compression');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const crossdomain = require('helmet-crossdomain')
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const path = require('path');
 
-var app = express();
+const config = require('./config');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+const api = require('./api');
+const logger = require('./utils/logger')(config);
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+/* configure express app */
+
+logger.info('Configuring BoM...');
+
+const app = express('BoM');
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.use(morgan(config.logging.morgan.format));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(helmet());
+app.use(crossdomain());
+
 app.use(cookieParser());
+
+app.use(compression({
+  filter: (req, res) => {
+    if (req.headers['x-no-compression']) {
+      return false
+    } else {
+      return compression.filter(req, res);
+    }
+  }
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -42,5 +63,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+logger.info('BoM was configured successfully!');
 
 module.exports = app;
