@@ -1,54 +1,37 @@
 <template>
-  <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
-    <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <router-view></router-view>
-    </main>
-  </div>
+<div>
+  <b-navbar toggleable="md" type="dark" variant="info">
+    <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+    <b-navbar-brand>Brew o Matic</b-navbar-brand>
+
+    <b-collapse is-nav id="nav_collapse">
+      <b-navbar-nav>
+        <span v-for="m in menu" :key="m.label">
+          <b-nav-item>
+            <router-link :to="m.to">{{ m.label }}</router-link>
+          </b-nav-item>
+        </span>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+
+  <router-view></router-view>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  data() {
+    return {
+      menu: [
+        { to: { name: 'home' }, label: 'Home' },
+        { to: { name: 'detail', params: { id: 1 } }, label: 'Detail' },
+        { to: { name: 'post' }, label: 'Post' }
+      ]
+    }
+  }
 }
 </script>
 
 <style>
-body {
-  margin: 0;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-main {
-  text-align: center;
-  margin-top: 40px;
-}
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
-}
-
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}
 </style>
