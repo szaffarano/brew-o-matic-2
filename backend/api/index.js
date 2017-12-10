@@ -1,8 +1,6 @@
 
-module.exports = function (config) {
+module.exports = function (config, logger) {
   const express = require('express');
-
-  const logger = require('../utils/logger')(config);
 
   const router = express.Router();
 
@@ -10,7 +8,7 @@ module.exports = function (config) {
     res.json({ success: 'true' })
   });
 
-  router.use('/', require('./users'));
+  router.use('/', require('./user'));
 
   return router
 }

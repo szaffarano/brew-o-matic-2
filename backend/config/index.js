@@ -26,4 +26,31 @@ if (argv.config) {
   externalConfig = require(defaultConfigPath)
 }
 
-module.exports = _.defaultsDeep(externalConfig, baseConfig)
+const modes = {
+  isDevMode() {
+    return !process.env.NODE_ENV || process.env.NODE_ENV === "development";
+  },
+
+  isProductionMode() {
+    return process.env.NODE_ENV === "production";
+  },
+
+  isTestMode() {
+    return process.env.NODE_ENV === "test";
+  }
+};
+
+const strategies = {
+  configureTwitter() {
+    return this.auth.twitter
+      && this.auth.twitter.consumerKey
+      && this.auth.twitter.consumerSecret
+  },
+  configureGoogle() {
+    return this.auth.google
+      && this.auth.google.clientID
+      && this.auth.google.clientSecret
+  }
+}
+
+module.exports = _.defaultsDeep(externalConfig, baseConfig, modes, strategies)

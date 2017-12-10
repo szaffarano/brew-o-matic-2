@@ -1,50 +1,49 @@
 'use strict'
 
-const chalk = require("chalk");
+const User = require('../domain/user')
 
-module.exports = function (config) {
+module.exports = function (config, logger) {
     const express = require('express');
-
     const passport = require('passport')
-
-    const TwitterStrategy = require('passport-twitter').Strategy
-
-    const logger = require('../utils/logger')(config);
 
     const router = express.Router();
 
-    passport.serializeUser(function (user, done) {
-        logger.info("[serializeUser] user.id: " + user.id)
-        done(null, user.id);
-    });
-
-    passport.deserializeUser(function (id, done) {
-        logger.info("[deserializeUser] user.id: " + user.id)
-        done(null, id)
-    });
-
-    if (config.auth.twitter.consumerKey && config.auth.twitter.consumerSecret) {
-        console.info(chalk.green.bold('Configuring twitter authentication'))
-
-        passport.use(new TwitterStrategy({
-            consumerKey: config.auth.twitter.consumerKey,
-            consumerSecret: config.auth.twitter.consumerSecret,
-            callbackURL: "/auth/twitter/callback"
-        }, function (token, tokenSecret, profile, cb) {
-            logger.info("Login ok, returning user profile:", profile.userName)
-            cb(null, profile);
+    function createUser(req, userProfile, cb) {
+        if (req.user) {
+            logger.info(`[${userProfile.provider}]`, 'User already authenticated');
+            return cb(null, req.user);
+        } else {
+            logger.info(`[${userProfile.provider}]`, 'User not authenticated');
         }
-        ));
 
-        router.get('/twitter', passport.authenticate('twitter'));
+        User.findOne({
+            username: userProfile.username.toLowerCase()
+        }, function (err, u) {
+            if (u) {
+                logger.info(`[${userProfile.provider}]`, 'Returning existent user')
+                return cb(err, u);
+            }
 
-        router.get('/twitter/callback',
-            passport.authenticate('twitter', { failureRedirect: '/login' }),
-            function (req, res) {
-                logger.info("callback ok")
-                res.redirect('/');
+            let user = new User();
+            user.name = userProfile.name;
+            user.email = userProfile.email;
+            user.username = userProfile.username;
+            user.provider = userProfile.provider;
+            user.profileId = userProfile.profileId
+
+            logger.info(`[${userProfile.provider}]`, `User ${userProfile.username} not found in db, creating...`)
+
+            user.save(function (err) {
+                if (err) {
+                    logger.error(`[${userProfile.provider}]`, 'Error creating user in db', err)
+                }
+                cb(err, user);
             });
+        })
     }
+
+    require('./twitter')(router, config, createUser, logger)
+    require('./google')(router, config, createUser, logger)
 
     return router
 }
