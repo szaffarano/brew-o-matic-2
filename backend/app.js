@@ -11,7 +11,7 @@ const passport = require('passport')
 
 const path = require('path');
 
-const config = require('./config');
+const config = require('./config/');
 
 const api = require('./api');
 const auth = require('./auth');
@@ -28,13 +28,13 @@ app.set('view engine', 'pug');
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.set('trust proxy', 1) // trust first proxy
-// app.use(session({
-//   secret: 'keyboard cat',
-//   resave: true,
-//   saveUninitialized: true,
-//   cookie: { secure: false }
-// }))
-app.use(session({ secret: 'blah', name: 'id' }))
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
+// app.use(session({ secret: 'blah', name: 'id' }))
 app.use(passport.initialize());
 app.use(passport.session());
 
