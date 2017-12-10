@@ -6,5 +6,11 @@ module.exports = {
         console: {
             level: 'debug'
         }
+    },
+    auth: {
+        twitter: {
+            consumerKey: '',
+            consumerSecret: '',
+        }
     }
 }

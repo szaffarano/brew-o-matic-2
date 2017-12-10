@@ -6,21 +6,37 @@ const compression = require('compression');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const crossdomain = require('helmet-crossdomain')
+const session = require('express-session');
+const passport = require('passport')
 
 const path = require('path');
 
 const config = require('./config');
 
 const api = require('./api');
+const auth = require('./auth');
+
 const logger = require('./utils/logger')(config);
 
 /* configure express app */
-
 logger.info('Configuring BoM...');
 
 const app = express('BoM');
 
+app.set('view engine', 'pug');
+
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.set('trust proxy', 1) // trust first proxy
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: true,
+//   saveUninitialized: true,
+//   cookie: { secure: false }
+// }))
+app.use(session({ secret: 'blah', name: 'id' }))
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(morgan(config.logging.morgan.format));
 
@@ -44,7 +60,8 @@ app.use(compression({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', api);
+app.use('/api', api(config));
+app.use('/auth', auth(config));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

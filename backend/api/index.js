@@ -1,11 +1,16 @@
-const express = require('express');
 
-const router = express.Router();
+module.exports = function (config) {
+  const express = require('express');
 
-router.get('/', function (req, res, next) {
-  res.json({ success: 'true' })
-});
+  const logger = require('../utils/logger')(config);
 
-router.use('/', require('./users'));
+  const router = express.Router();
 
-module.exports = router;
+  router.get('/', function (req, res, next) {
+    res.json({ success: 'true' })
+  });
+
+  router.use('/', require('./users'));
+
+  return router
+}
