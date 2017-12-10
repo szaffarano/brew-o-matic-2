@@ -27,7 +27,8 @@ module.exports = {
             httpOnly: true,
             secure: false
         },
-        name: "sessionId",
-        collection: "sessions"
+        name: '',
+        collection: '',
+        secret: ''
     },
 }

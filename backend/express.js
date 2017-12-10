@@ -57,7 +57,7 @@ module.exports = function (config, db, logger) {
     app.use(session({
         saveUninitialized: true,
         resave: false,
-        secret: 'keyboard cat', // @TODO strong secret!
+        secret: config.sessions.secret,
         store: new MongoStore({
             mongooseConnection: db,
             collection: config.sessions.collection,
