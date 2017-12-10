@@ -10,10 +10,13 @@ router.get("/logout", function (req, res) {
 
 router.get('/metadata', function (req, res) {
   if (req.user) {
-    res.json(req.user)
+    ({ username, name, email, roles } = req.user)
+    res.json({
+      user: { username, name, email, roles }
+    })
   } else {
     res.status(HttpStatus.UNAUTHORIZED)
-      .json({'message': 'No session available'})
+      .json({ 'message': 'No session available' })
   }
 });
 
