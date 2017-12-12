@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import Detail from '@/components/Detail'
-import Post from '@/components/Post'
+
+import Dashboard from '@/components/Dashboard'
+import Notifications from '@/components/Notifications'
+import Devices from '@/components/configuration/Devices'
+import Gear from '@/components/configuration/Gear'
+import Water from '@/components/configuration/Water'
+import Calculator from '@/components/tools/Calculator'
+
 
 Vue.use(Router)
 
@@ -10,18 +15,37 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      redirect: '/dashboard'
     },
     {
-      path: '/detail/:id',
-      name: 'detail',
-      component: Detail
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Dashboard
     },
     {
-      path: '/post',
-      name: 'post',
-      component: Post
+      path: '/notifications',
+      name: 'notifications',
+      component: Notifications
+    },
+    {
+      path: '/configuration/devices',
+      name: 'devices',
+      component: Devices
+    },
+    {
+      path: '/configuration/gear',
+      name: 'gear',
+      component: Gear
+    },
+    {
+      path: '/configuration/water',
+      name: 'water',
+      component: Water
+    },
+    {
+      path: '/tools/calculator',
+      name: 'calculator',
+      component: Calculator
     }
   ]
 })
