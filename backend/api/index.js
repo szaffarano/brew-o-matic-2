@@ -12,3 +12,4 @@ module.exports = function (config, logger) {
 
   return router
 }
+

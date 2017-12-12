@@ -26,7 +26,7 @@ const UserSchema = new Schema({
         index: true,
         lowercase: true,
         "default": "",
-        match: [/.+\@.+\..+/, "Please fill a valid email address"]
+        match: [/.+@.+\..+/, "Please fill a valid email address"]
     },
     roles: {
         type: [

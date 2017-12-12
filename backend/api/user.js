@@ -10,7 +10,7 @@ router.get("/logout", function (req, res) {
 
 router.get('/metadata', function (req, res) {
   if (req.user) {
-    ({ username, name, email, roles } = req.user)
+    const { username, name, email, roles } = req.user
     res.json({
       user: { username, name, email, roles }
     })

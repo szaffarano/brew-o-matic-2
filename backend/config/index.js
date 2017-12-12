@@ -13,11 +13,14 @@ const defaultConfigPath = path.join(rootPath, 'config.js')
 let externalConfig = {}
 let baseConfig = require('./base')
 
+/* eslint-disable no-console */
+
 // search config file in current directory
 if (argv.config) {
   if (!fs.existsSync(argv.config)) {
-    console.error(chalk.red.bold(`Configuration file: '${argv.config}' not found`))
-    process.exit(1)
+    const msg = `Configuration file: '${argv.config}' not found`
+    console.error(chalk.red.bold(msg))
+    throw new Error(msg)
   }
   console.info(chalk.yellow.bold(`Reading external configuration '${argv.config}'`))
   externalConfig = require(argv.config)
@@ -25,6 +28,8 @@ if (argv.config) {
   console.info(chalk.yellow.bold(`Reading default configuration '${path.join(__dirname, defaultConfigPath)}'`))
   externalConfig = require(defaultConfigPath)
 }
+
+/* eslint-enable no-console */
 
 const modes = {
   isDevMode() {

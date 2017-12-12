@@ -12,7 +12,7 @@
     "connect-mongo": "^2.0.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "express": "^4.16.2",
     "express-flash": "^0.0.2",
     "express-session": "^1.15.6",
     "helmet": "^3.9.0",
@@ -22,11 +22,18 @@
     "mongoose": "^4.13.6",
     "morgan": "~1.9.0",
     "passport": "^0.4.0",
-    "passport-google-oauth": "^1.0.0",
+    "passport-google-oauth20": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "pug": "^2.0.0-rc.4",
     "serve-favicon": "~2.4.5",
     "winston": "^2.4.0",
     "yargs": "^10.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.13.0",
+    "eslint-plugin-node": "^5.2.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   }
 }
