@@ -1,8 +1,6 @@
 <template>
   <div>
-    <b-jumbotron header="Posts" lead="Posts about homebrewing" >
-      <p>bla bla</p>
-    </b-jumbotron>
+    <p>Post</p>
   </div>
 </template>
 

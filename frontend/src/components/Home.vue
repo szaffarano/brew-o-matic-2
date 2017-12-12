@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-alert show> Home</b-alert>
+    <p>Home</p>
   </div>
 </template>
 <script>
