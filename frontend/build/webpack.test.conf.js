@@ -2,6 +2,8 @@
 
 // This is the webpack config used for unit tests.
 
+/*eslint-env node*/
+
 const utils = require('./utils')
 const webpack = require('webpack')
 const merge = require('webpack-merge')

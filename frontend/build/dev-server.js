@@ -1,5 +1,7 @@
 'use strict'
 
+/*eslint-env node*/
+
 require('./check-versions')()
 
 const config = require('../config')
@@ -73,6 +75,7 @@ const readyPromise = new Promise(resolve => {
   _resolve = resolve
 })
 
+/* eslint-disable no-console */
 console.log('> Starting dev server...')
 devMiddleware.waitUntilValid(() => {
   console.log('> Listening at ' + uri + '\n')
@@ -82,6 +85,7 @@ devMiddleware.waitUntilValid(() => {
   }
   _resolve()
 })
+/* eslint-enable no-console */
 
 const server = app.listen(port)
 

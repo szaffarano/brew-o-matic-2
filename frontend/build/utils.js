@@ -1,5 +1,7 @@
 'use strict'
 
+/*eslint-env node*/
+
 const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -23,7 +25,7 @@ exports.cssLoaders = function (options) {
   }
 
   // generate loader string to be used with extract text plugin
-  function generateLoaders (loader, loaderOptions) {
+  function generateLoaders(loader, loaderOptions) {
     const loaders = [cssLoader]
     if (loader) {
       loaders.push({

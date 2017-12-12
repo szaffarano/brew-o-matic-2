@@ -1,10 +1,12 @@
 'use strict'
 
+/*eslint-env node*/
+
 const chalk = require('chalk')
 const semver = require('semver')
 const packageConfig = require('../package.json')
 const shell = require('shelljs')
-function exec (cmd) {
+function exec(cmd) {
   return require('child_process').execSync(cmd).toString().trim()
 }
 
@@ -37,6 +39,7 @@ module.exports = function () {
   }
 
   if (warnings.length) {
+    /* eslint-disable no-console */
     console.log('')
     console.log(chalk.yellow('To use this template, you must update following to modules:'))
     console.log()
@@ -46,5 +49,6 @@ module.exports = function () {
     }
     console.log()
     process.exit(1)
+    /* eslint-enable no-console */
   }
 }

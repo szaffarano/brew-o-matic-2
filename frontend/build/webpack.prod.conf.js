@@ -1,6 +1,7 @@
 'use strict'
 
-const fs = require('fs')
+/*eslint-env node*/
+
 const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')
@@ -77,6 +78,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
+      /* eslint-disable no-unused-vars */
       minChunks: function (module, count) {
         // any required modules inside node_modules are extracted to vendor
         return (
@@ -87,6 +89,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           ) === 0
         )
       }
+      /* eslint-enable no-unused-vars */
     }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
