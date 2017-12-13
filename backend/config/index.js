@@ -47,14 +47,14 @@ const modes = {
 
 const strategies = {
   configureTwitter() {
-    return this.auth.twitter
-      && this.auth.twitter.consumerKey
-      && this.auth.twitter.consumerSecret
+    return this.auth.twitter &&
+      this.auth.twitter.consumerKey &&
+      this.auth.twitter.consumerSecret
   },
   configureGoogle() {
-    return this.auth.google
-      && this.auth.google.clientID
-      && this.auth.google.clientSecret
+    return this.auth.google &&
+      this.auth.google.clientID &&
+      this.auth.google.clientSecret
   }
 }
 
