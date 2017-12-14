@@ -13,9 +13,12 @@ const compression = require('compression');
 const flash = require("express-flash");
 const MongoStore = require("connect-mongo")(session);
 
+const errorHandler = require('./utils/error-handler')
+
 module.exports = function(config, db, logger) {
   const api = require('./api');
-  const auth = require('./auth');
+  const authentication = require('./authentication');
+  const abilities = require('./authorization/abilities');
 
   const app = express('BoM');
 
@@ -71,8 +74,10 @@ module.exports = function(config, db, logger) {
 
   require('./passport')(config, app, logger)
 
+  app.use(abilities)
+
   app.use('/api', api(config, logger));
-  app.use('/auth', auth(config, logger));
+  app.use('/auth', authentication(config, logger));
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
@@ -81,16 +86,7 @@ module.exports = function(config, db, logger) {
     next(err);
   });
 
-  // error handler
-  app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-  });
+  app.use(errorHandler);
 
   return app;
 }

@@ -7,7 +7,7 @@ module.exports = function(config, logger) {
     res.json({ success: 'true' })
   });
 
-  router.use('/', require('./user'));
+  router.use('/user', require('./user')(config, logger));
 
   return router
 }

@@ -11,6 +11,10 @@ logger.info(chalk.bold('Configuring BoM...'));
 const db = require('./mongo')(config, logger)
 const app = require('./express')(config, db, logger)
 
+process.on('unhandledRejection', (err) => {
+  logger.error(err);
+  throw err
+})
 logger.info(chalk.bold('BoM was configured successfully!'));
 
 module.exports = app;
