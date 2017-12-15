@@ -12,6 +12,22 @@ module.exports = {
     twitter: {
       consumerKey: '',
       consumerSecret: '',
+    },
+    google: {
+      clientID: '',
+      clientSecret: '',
+    },
+    facebook: {
+      clientID: '',
+      clientSecret: '',
+    },
+    github: {
+      clientID: '',
+      clientSecret: '',
+    },
+    linkedin: {
+      clientID: '',
+      clientSecret: '',
     }
   },
   db: {

@@ -55,6 +55,21 @@ const strategies = {
     return this.auth.google &&
       this.auth.google.clientID &&
       this.auth.google.clientSecret
+  },
+  configureFacebook() {
+    return this.auth.facebook &&
+      this.auth.facebook.clientID &&
+      this.auth.facebook.clientSecret
+  },
+  configureGithub() {
+    return this.auth.github &&
+      this.auth.github.clientID &&
+      this.auth.github.clientSecret
+  },
+  configureLinkedIn() {
+    return this.auth.linkedin &&
+      this.auth.linkedin.clientID &&
+      this.auth.linkedin.clientSecret
   }
 }
 

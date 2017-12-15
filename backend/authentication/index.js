@@ -44,6 +44,9 @@ module.exports = function(config, logger) {
 
   require('./twitter')(router, config, createUser, logger)
   require('./google')(router, config, createUser, logger)
+  require('./facebook')(router, config, createUser, logger)
+  require('./github')(router, config, createUser, logger)
+  require('./linkedin')(router, config, createUser, logger)
 
   return router
 }

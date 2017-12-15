@@ -13,6 +13,7 @@ C.append = function(items, prefix) {
 
 C.append(["admin", "user", "guest"], "ROLE");
 
-C.append(["local", "twitter", "google", "facebook"], "PROVIDER");
+C.append(["local", "twitter", "google", "facebook", "github", "linkedin"],
+  "PROVIDER");
 
 module.exports = C;

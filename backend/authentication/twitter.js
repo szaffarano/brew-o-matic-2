@@ -28,9 +28,9 @@ module.exports = function(router, config, createUser, logger) {
 
     router.get('/twitter', passport.authenticate('twitter'));
     router.get('/twitter/callback',
-      passport.authenticate('twitter', { failureRedirect: '/login' }),
-      function(req, res) {
-        res.redirect('/');
-      });
+      passport.authenticate('twitter', {
+        successRedirect: '/#/',
+        failureRedirect: '/login'
+      }));
   }
 }
