@@ -10,7 +10,7 @@
 
       <b-collapse is-nav id="nav_collapse">
 
-        <b-navbar-nav>
+        <b-navbar-nav v-if="isAuthenticated">
           <span v-for="m in menu" :key="m.label">
             <span v-if="m.children">
               <b-nav-item-dropdown :text="m.label" right>
@@ -25,13 +25,13 @@
           </span>
         </b-navbar-nav>
 
-        <b-navbar-nav class="ml-auto">
+        <b-navbar-nav class="ml-auto" v-if="isAuthenticated">
           <b-nav-item-dropdown right>
             <template slot="button-content">
-              <em>User</em>
+              <em>{{ user.name }}</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Signout</b-dropdown-item>
+            <b-dropdown-item href="#" @click="logout">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
@@ -40,7 +40,19 @@
   </b-container>
 
   <b-container>
-    <router-view></router-view>
+    <router-view v-if="isAuthenticated"></router-view>
+    <div v-else>
+      <div>
+        <h2>Iniciar sesión con</h2>
+        <div>
+          <a href="#" @click="login('google')" class="zocial google">Google</a>
+          <a href="#" @click="login('twitter')" class="zocial twitter">Twitter</a>
+          <a href="#" @click="login('facebook')" class="zocial facebook">Facebook</a>
+          <a href="#" @click="login('github')" class="zocial github">Github</a>
+          <a href="#" @click="login('linkedin')" class="zocial linkedin">LinkedIn</a>
+        </div>
+      </div>
+    </div>
   </b-container>
 
   <b-container>
@@ -58,7 +70,15 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
+  computed: {
+    ...mapGetters(['isAuthenticated', 'user'])
+  },
+  methods: {
+    ...mapActions(['login', 'logout'])
+  },
   data() {
     return {
       menu: [
@@ -80,6 +100,9 @@ export default {
         { to: { name: 'notifications' }, label: 'Notifications' }
       ]
     }
+  },
+  mounted() {
+    this.$store.dispatch('updateMetadata')
   }
 }
 </script>
@@ -87,5 +110,8 @@ export default {
 <style scoped>
 .navbar {
   margin-bottom: 10px;
+}
+a {
+    margin-bottom: 5px;
 }
 </style>

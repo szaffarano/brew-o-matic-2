@@ -5,16 +5,21 @@ module.exports = function(config, logger) {
   const router = express.Router();
   const { hasSession, logout } = require('../utils/session')(config, logger)
 
-  router.get("/logout", function(req, res) {
+  router.get("/logout", hasSession, function(req, res) {
     logout(req, res)
   });
 
-  router.get('/metadata', hasSession, function(req, res) {
+  router.get('/metadata', function(req, res) {
     req.ability.throwUnlessCan('read', 'Metadata')
 
-    const { username, name, email, roles } = req.user
+    let user = {}
+
+    if (req.isAuthenticated()) {
+      user = req.user
+    }
+
     res.json({
-      user: { username, name, email, roles }
+      user: user
     })
   });
 
