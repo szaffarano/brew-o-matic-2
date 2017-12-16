@@ -14,7 +14,7 @@ module.exports = function(router, config, createUser, logger) {
       consumerKey: config.auth.twitter.consumerKey,
       consumerSecret: config.auth.twitter.consumerSecret,
       passReqToCallback: true,
-      callbackURL: "/auth/twitter/callback"
+      callbackURL: config.app.url + '/auth/twitter/callback',
     }, function(req, token, tokenSecret, profile, cb) {
       const userProfile = {
         name: profile.displayName,

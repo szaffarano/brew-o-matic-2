@@ -14,7 +14,7 @@ module.exports = function(router, config, createUser, logger) {
         clientID: config.auth.google.clientID,
         clientSecret: config.auth.google.clientSecret,
         passReqToCallback: true,
-        callbackURL: "/auth/google/callback"
+        callbackURL: config.app.url + '/auth/google/callback',
       },
       function(req, accessToken, refreshToken, profile, cb) {
         const userProfile = {

@@ -14,7 +14,7 @@ module.exports = function(router, config, createUser, logger) {
         clientID: config.auth.github.clientID,
         clientSecret: config.auth.github.clientSecret,
         passReqToCallback: true,
-        callbackURL: "/auth/github/callback"
+        callbackURL: config.app.url + '/auth/github/callback',
       },
       function(req, accessToken, refreshToken, profile, cb) {
         const userProfile = {

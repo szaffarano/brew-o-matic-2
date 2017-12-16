@@ -14,7 +14,7 @@ module.exports = function(router, config, createUser, logger) {
         clientID: config.auth.linkedin.clientID,
         clientSecret: config.auth.linkedin.clientSecret,
         passReqToCallback: true,
-        callbackURL: "/auth/linkedin/callback",
+        callbackURL: config.app.url + '/auth/linkedin/callback',
         scope: ['r_emailaddress', 'r_basicprofile']
       },
       function(req, accessToken, refreshToken, profile, cb) {

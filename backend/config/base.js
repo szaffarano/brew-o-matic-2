@@ -3,7 +3,8 @@ module.exports = {
   ip: 'localhost',
   app: {
     title: 'Brew o Matic',
-    version: '1.0-SNAPSHOT'
+    version: '1.0-SNAPSHOT',
+    url: ''
   },
   logging: {
     morgan: {
@@ -14,22 +15,27 @@ module.exports = {
     }
   },
   auth: {
+    // https://apps.twitter.com/app/
     twitter: {
       consumerKey: '',
       consumerSecret: '',
     },
+    // https://console.developers.google.com/apis/dashboard
     google: {
       clientID: '',
       clientSecret: '',
     },
+    // https://developers.facebook.com/apps/
     facebook: {
       clientID: '',
       clientSecret: '',
     },
+    // https://github.com/settings/developers
     github: {
       clientID: '',
       clientSecret: '',
     },
+    // https://www.linkedin.com/secure/developer
     linkedin: {
       clientID: '',
       clientSecret: '',

@@ -14,7 +14,7 @@ module.exports = function(router, config, createUser, logger) {
         clientID: config.auth.facebook.clientID,
         clientSecret: config.auth.facebook.clientSecret,
         passReqToCallback: true,
-        callbackURL: "/auth/facebook/callback",
+        callbackURL: config.app.url + '/auth/facebook/callback',
         profileFields: ["name", "emails", "link", "locale", "timezone"]
       },
       function(req, accessToken, refreshToken, profile, cb) {
