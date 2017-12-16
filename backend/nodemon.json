@@ -1,0 +1,16 @@
+{
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "execMap": {
+    "js": "node app.js"
+  },
+  "verbose": false,
+  "watch": [
+    ".",
+    "config.js",
+    "webpack.*.config.js"
+  ],
+  "ext": "js json"
+}

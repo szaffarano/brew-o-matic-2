@@ -3,33 +3,48 @@
 const fs = require("fs");
 const chalk = require("chalk");
 const path = require("path");
-const argv = require('yargs').argv
 
 const _ = require("lodash");
 
-const rootPath = path.normalize(path.join(__dirname, '..'));
-const defaultConfigPath = path.join(rootPath, 'config.js')
+/* eslint-disable no-console */
+/* global WEBPACK_BUNDLE */
+/* eslint-disable node/no-unpublished-require */
+
+global.rootPath = path.normalize(path.join(__dirname, ".."));
+if (WEBPACK_BUNDLE) {
+  let bundleFullPath;
+  if (process.argv.length > 0) {
+    bundleFullPath = process.argv[1];
+  } else {
+    bundleFullPath = process.cwd();
+  }
+
+  global.rootPath = path.normalize(path.join(path.dirname(bundleFullPath), ".."));
+}
+
+const extConfigFile = path.join(global.rootPath, "config.js");
 
 let externalConfig = {}
 let baseConfig = require('./base')
 
-/* eslint-disable no-console */
+if (!fs.existsSync(extConfigFile)) {
+  const msg = `Configuration file: '${extConfigFile}' not found`
+  console.error(chalk.red.bold(msg))
+  throw new Error(msg)
+}
 
-// search config file in current directory
-if (argv.config) {
-  if (!fs.existsSync(argv.config)) {
-    const msg = `Configuration file: '${argv.config}' not found`
-    console.error(chalk.red.bold(msg))
-    throw new Error(msg)
-  }
-  console.info(chalk.yellow.bold(`Reading external configuration '${argv.config}'`))
-  externalConfig = require(argv.config)
-} else if (fs.existsSync(defaultConfigPath)) {
-  console.info(chalk.yellow.bold(`Reading default configuration '${path.join(__dirname, defaultConfigPath)}'`))
-  externalConfig = require(defaultConfigPath)
+console.info(chalk.yellow.bold(`Reading external configuration '${extConfigFile}'`))
+if (WEBPACK_BUNDLE) {
+  console.log('loading(bundle)', extConfigFile)
+  externalConfig = require("../config.js");
+  console.log('bundle loaded!')
+} else {
+  console.log('loading', extConfigFile)
+  externalConfig = require(extConfigFile);
 }
 
 /* eslint-enable no-console */
+/* eslint-enable node/no-unpublished-require */
 
 const modes = {
   isDevMode() {

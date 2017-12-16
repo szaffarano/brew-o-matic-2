@@ -32,8 +32,6 @@ module.exports = function(config, db, logger) {
     }
   }));
 
-  app.set('port', config.port)
-
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
     extended: true
@@ -78,6 +76,8 @@ module.exports = function(config, db, logger) {
 
   app.use('/api', api(config, logger));
   app.use('/auth', authentication(config, logger));
+
+  app.use(express.static(path.join(__dirname, 'public')));
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {

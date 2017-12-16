@@ -1,5 +1,10 @@
 module.exports = {
   port: 3000,
+  ip: 'localhost',
+  app: {
+    title: 'Brew o Matic',
+    version: '1.0-SNAPSHOT'
+  },
   logging: {
     morgan: {
       format: 'short'
