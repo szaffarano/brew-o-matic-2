@@ -1,0 +1,29 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:3.6-jessie
+    networks:
+      - backend
+    volumes:
+      - db-data:/data/db
+
+  bom:
+    image: test
+    ports:
+      - 80:3000
+    networks:
+      - frontend
+      - backend
+    links:
+      - mongo:mongodb
+    depends_on:
+      - mongo
+    volumes:
+      - /tmp/dist/config.js:/usr/src/app/config.js
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db-data:
