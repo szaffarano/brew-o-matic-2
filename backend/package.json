@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --inspect",
+    "start": "cross-env NODE_ENV=production node app.js",
     "build": "webpack --progress --colors --config build/webpack.config.js"
   },
   "dependencies": {

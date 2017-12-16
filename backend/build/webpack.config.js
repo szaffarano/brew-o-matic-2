@@ -10,15 +10,6 @@ let _ = require('lodash')
 let distPath = path.resolve(__dirname, '..', 'dist')
 let modules_path = path.resolve(distPath, 'node_modules')
 
-let nodeModules = {}
-fs.readdirSync('node_modules')
-  .filter(function(x) {
-    return ['.bin'].indexOf(x) === -1
-  })
-  .forEach(function(mod) {
-    nodeModules[mod] = 'commonjs ' + mod
-  })
-
 module.exports = {
   target: 'node',
   node: {
@@ -30,39 +21,20 @@ module.exports = {
     __dirname: true
   },
 
-  entry: ['babel-polyfill', './app.js'],
+  entry: ['./app.js'],
 
   output: {
     path: distPath,
     filename: 'server.js'
   },
 
-  externals: _.defaults(nodeModules, {
+  externals: {
     '../config.js': 'commonjs ./config.js',
-  }),
-
-  // devtool: 'sourcemap',
-
-  module: {
-    rules: [{
-      test: /\.js$/,
-      loader: 'babel-loader',
-      exclude: [/node_modules/, /vendor/]
-    }]
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      WEBPACK_BUNDLE: true
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      mangle: true
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
+      WEBPACK_BUNDLE: true,
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, '..', 'public'),
