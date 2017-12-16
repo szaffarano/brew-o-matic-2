@@ -27,19 +27,15 @@ const extConfigFile = path.join(global.rootPath, "config.js");
 let externalConfig = {}
 let baseConfig = require('./base')
 
-if (!fs.existsSync(extConfigFile)) {
-  const msg = `Configuration file: '${extConfigFile}' not found`
-  console.error(chalk.red.bold(msg))
-  throw new Error(msg)
-}
-
-console.info(chalk.yellow.bold(`Reading external configuration '${extConfigFile}'`))
 if (WEBPACK_BUNDLE) {
-  console.log('loading(bundle)', extConfigFile)
   externalConfig = require("../config.js");
-  console.log('bundle loaded!')
 } else {
-  console.log('loading', extConfigFile)
+  console.info(chalk.yellow.bold(`Reading external configuration '${extConfigFile}'`))
+  if (!fs.existsSync(extConfigFile)) {
+    const msg = `Configuration file: '${extConfigFile}' not found`
+    console.error(chalk.red.bold(msg))
+    throw new Error(msg)
+  }
   externalConfig = require(extConfigFile);
 }
 
