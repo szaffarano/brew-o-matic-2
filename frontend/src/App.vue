@@ -1,10 +1,10 @@
 <template>
-<b-container fluid>
+<b-container class="pl-0 pr-0">
 
-  <b-container>
-    <b-navbar toggleable="md" type="dark" variant="info" class="rounded">
+  <b-container fluid class="pl-0 pr-0">
+    <b-navbar toggleable="md" type="dark" variant="dark" class="rounded">
 
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+      <b-navbar-toggle v-if="isAuthenticated" target="nav_collapse"></b-navbar-toggle>
 
       <b-navbar-brand>Brew o Matic</b-navbar-brand>
 
@@ -57,9 +57,9 @@
 
   <b-container>
     <footer class="footer">
-      <b-container>
+      <b-container fluid class="pl-0 pr-0">
         <b-row class="text-muted">
-          <b-col class="text-left">Brew o Matic 2</b-col>
+          <b-col class="text-left">BoM 2</b-col>
           <b-col class="text-right" cols="9">Somos Cerveceros</b-col>
         </b-row>
       </b-container>
