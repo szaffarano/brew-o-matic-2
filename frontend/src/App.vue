@@ -1,72 +1,114 @@
 <template>
-<b-container class="pl-0 pr-0">
+  <v-app id="bom2" dark>
 
-  <b-container fluid class="pl-0 pr-0">
-    <b-navbar toggleable="md" type="dark" variant="dark" class="rounded">
-
-      <b-navbar-toggle v-if="isAuthenticated" target="nav_collapse"></b-navbar-toggle>
-
-      <b-navbar-brand>Brew o Matic</b-navbar-brand>
-
-      <b-collapse is-nav id="nav_collapse">
-
-        <b-navbar-nav v-if="isAuthenticated">
-          <span v-for="m in menu" :key="m.label">
-            <span v-if="m.children">
-              <b-nav-item-dropdown :text="m.label" right>
-                <span v-for="sm in m.children" :key="sm.label">
-                  <b-dropdown-item :to="sm.to">{{ sm.label }}</b-dropdown-item>
-                </span>
-              </b-nav-item-dropdown>
-            </span>
-            <span v-else>
-              <b-nav-item :exact="true" :to="m.to">{{ m.label }}</b-nav-item>
-            </span>
+    <v-navigation-drawer clipped fixed v-model="drawer" app v-if="isAuthenticated">
+      <v-list dense >
+        <span v-for="m in menu" :key="m.label">
+          <span v-if="m.children">
+            <v-list-group>
+              <v-list-tile slot="item">
+                <v-list-tile-action>
+                  <v-icon>{{ m.icon }}</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ m.label }}</v-list-tile-title>
+                </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-icon>keyboard_arrow_down</v-icon>
+                </v-list-tile-action>
+              </v-list-tile>
+              <v-list-tile v-for="i in m.children" v-bind:key="i.label" :to="i.to">
+                  <v-list-tile-content>
+                      <v-list-tile-title>{{ i.label }}</v-list-tile-title>
+                  </v-list-tile-content>
+                  <v-list-tile-action>
+                    <v-icon>{{ i.icon }}</v-icon>
+                  </v-list-tile-action>
+              </v-list-tile>
+            </v-list-group>
           </span>
-        </b-navbar-nav>
+          <span v-else>
+            <v-list-tile :to="m.to">
+              <v-list-tile-action>
+                <v-icon>{{ m.icon }}</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ m.label }}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </span>
+        </span>
+      </v-list>
+    </v-navigation-drawer>
 
-        <b-navbar-nav class="ml-auto" v-if="isAuthenticated">
-          <b-nav-item-dropdown right>
-            <template slot="button-content">
-              <em>{{ user.name }}</em>
-            </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#" @click="logout">Logout</b-dropdown-item>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
+    <v-toolbar app fixed clipped-left >
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>Brew o Matic 2</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-menu bottom left offset-y v-if="isAuthenticated">
+        <v-btn icon slot="activator" dark>
+          <v-icon>more_vert</v-icon>
+        </v-btn>
+        <v-card>
+          <v-list>
+            <v-list-tile avatar>
+              <v-list-tile-avatar>
+                <v-icon dark>account_circle</v-icon>
+              </v-list-tile-avatar>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ user.name }}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+          <v-divider></v-divider>
+          <v-list>
+            <v-list-tile>
+              <v-list-tile-action><v-icon>mdi-account</v-icon></v-list-tile-action>
+              <v-list-tile-title>Profile</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click="logout">
+              <v-list-tile-action><v-icon>mdi-logout</v-icon></v-list-tile-action>
+              <v-list-tile-title>Logout</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-card>
+      </v-menu>
+    </v-toolbar>
 
-      </b-collapse>
-    </b-navbar>
-  </b-container>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout justify-center align-center>
+          <router-view v-if="isAuthenticated"></router-view>
+            <div v-else>
+              <div>
+                <h2>Iniciar sesión con</h2>
+                <div>
+                  <v-btn flat @click="login('google')">
+                    <v-icon>mdi-google</v-icon>
+                  </v-btn>
+                  <v-btn flat @click="login('twitter')">
+                    <v-icon>mdi-twitter</v-icon>
+                  </v-btn>
+                  <v-btn flat @click="login('facebook')">
+                    <v-icon>mdi-facebook</v-icon>
+                  </v-btn>
+                  <v-btn flat @click="login('github')">
+                    <v-icon>mdi-github-box</v-icon>
+                  </v-btn>
+                  <v-btn flat @click="login('linkedin')">
+                    <v-icon>mdi-linkedin</v-icon>
+                  </v-btn>
+                </div>
+              </div>
+            </div>
+        </v-layout>
+      </v-container>
+    </v-content>
 
-  <b-container>
-    <router-view v-if="isAuthenticated"></router-view>
-    <div v-else>
-      <div>
-        <h2>Iniciar sesión con</h2>
-        <div>
-          <a href="#" @click="login('google')" class="zocial google">Google</a>
-          <a href="#" @click="login('twitter')" class="zocial twitter">Twitter</a>
-          <a href="#" @click="login('facebook')" class="zocial facebook">Facebook</a>
-          <a href="#" @click="login('github')" class="zocial github">Github</a>
-          <a href="#" @click="login('linkedin')" class="zocial linkedin">LinkedIn</a>
-        </div>
-      </div>
-    </div>
-  </b-container>
-
-  <b-container>
-    <footer class="footer">
-      <b-container fluid class="pl-0 pr-0">
-        <b-row class="text-muted">
-          <b-col class="text-left">BoM 2</b-col>
-          <b-col class="text-right" cols="9">Somos Cerveceros</b-col>
-        </b-row>
-      </b-container>
-    </footer>
-  </b-container>
-
-</b-container>
+    <v-footer app fixed>
+      <span>&copy; 2017 - Somos Cerveceros</span>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
@@ -81,23 +123,26 @@ export default {
   },
   data() {
     return {
+      drawer: null,
       menu: [
-        { to: { name: 'dashboard' }, label: 'Dashboard' },
+        { to: { name: 'dashboard' }, label: 'Dashboard', icon: 'mdi-view-dashboard' },
         {
           to: { name: 'configuration' },
           label: 'Configuration',
+          icon: 'mdi-settings',
           children: [
-            { to: { name: 'gear' }, label: 'Gear' },
-            { to: { name: 'water' }, label: 'Water' },
-            { to: { name: 'devices' }, label: 'Devices' }
+            { to: { name: 'gear' }, label: 'Gear', icon: 'mdi-pot' },
+            { to: { name: 'water' }, label: 'Water', icon: 'mdi-water' },
+            { to: { name: 'devices' }, label: 'Devices', icon: 'mdi-desktop-classic' }
           ]
         },
         {
           to: { name: 'tools' },
           label: 'Tools',
-          children: [{ to: { name: 'calculator' }, label: 'Calculator' }]
+          icon: 'build',
+          children: [{ to: { name: 'calculator' }, label: 'Calculator', icon: 'mdi-calculator' }]
         },
-        { to: { name: 'notifications' }, label: 'Notifications' }
+        { to: { name: 'notifications' }, label: 'Notifications', icon: 'mdi-message' }
       ]
     }
   },
@@ -107,11 +152,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.navbar {
-  margin-bottom: 10px;
-}
-a {
-    margin-bottom: 5px;
-}
+<style>
 </style>

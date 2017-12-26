@@ -1,7 +1,5 @@
 <template>
-<b-jumbotron header="Dashboard">
   <p>The magic begins here...</p>
-</b-jumbotron>
 </template>
 
 <script>
