@@ -1,5 +1,5 @@
 <template>
-  <v-app id="bom2" dark>
+  <v-app id="bom2" light>
 
     <v-navigation-drawer clipped fixed v-model="drawer" app v-if="isAuthenticated">
       <v-list dense >
@@ -46,14 +46,14 @@
       <v-toolbar-title>Brew o Matic 2</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu bottom left offset-y v-if="isAuthenticated">
-        <v-btn icon slot="activator" dark>
+        <v-btn icon slot="activator">
           <v-icon>more_vert</v-icon>
         </v-btn>
         <v-card>
           <v-list>
             <v-list-tile avatar>
               <v-list-tile-avatar>
-                <v-icon dark>account_circle</v-icon>
+                <v-icon>account_circle</v-icon>
               </v-list-tile-avatar>
               <v-list-tile-content>
                 <v-list-tile-title>{{ user.name }}</v-list-tile-title>
@@ -76,7 +76,7 @@
     </v-toolbar>
 
     <v-content>
-      <v-container fluid fill-height>
+      <v-container fluid >
         <v-layout justify-center align-center>
           <router-view v-if="isAuthenticated"></router-view>
             <div v-else>
