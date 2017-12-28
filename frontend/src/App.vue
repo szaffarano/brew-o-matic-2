@@ -3,23 +3,27 @@
 
     <v-navigation-drawer clipped fixed v-model="drawer" app v-if="isAuthenticated">
       <v-list dense >
-        <span v-for="m in menu" :key="m.label">
+        <span v-for="m in menu" :key="m.name">
           <span v-if="m.children">
             <v-list-group>
               <v-list-tile slot="item">
                 <v-list-tile-action>
-                  <v-icon>{{ m.icon }}</v-icon>
+                  <v-badge color="red lighten-3" v-if="m.badge">
+                    <span slot="badge">{{ m.badge }}</span>
+                    <v-icon large>{{ m.icon }}</v-icon>
+                  </v-badge>
+                  <v-icon v-else>{{ m.icon }}</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                  <v-list-tile-title>{{ m.label }}</v-list-tile-title>
+                  <v-list-tile-title>{{ $t(m.to.name) }}</v-list-tile-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-icon>keyboard_arrow_down</v-icon>
                 </v-list-tile-action>
               </v-list-tile>
-              <v-list-tile v-for="i in m.children" v-bind:key="i.label" :to="i.to">
+              <v-list-tile v-for="i in m.children" v-bind:key="i.name" :to="i.to">
                   <v-list-tile-content>
-                      <v-list-tile-title>{{ i.label }}</v-list-tile-title>
+                      <v-list-tile-title>{{ $t(i.to.name) }}</v-list-tile-title>
                   </v-list-tile-content>
                   <v-list-tile-action>
                     <v-icon>{{ i.icon }}</v-icon>
@@ -30,10 +34,14 @@
           <span v-else>
             <v-list-tile :to="m.to">
               <v-list-tile-action>
-                <v-icon>{{ m.icon }}</v-icon>
+                <v-badge color="red lighten-3" v-if="m.badge">
+                  <span slot="badge">{{ m.badge }}</span>
+                  <v-icon large>{{ m.icon }}</v-icon>
+                </v-badge>
+                <v-icon v-else>{{ m.icon }}</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
-                <v-list-tile-title>{{ m.label }}</v-list-tile-title>
+                <v-list-tile-title>{{ $t(m.to.name) }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
           </span>
@@ -43,7 +51,7 @@
 
     <v-toolbar app fixed clipped-left >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Brew o Matic 2</v-toolbar-title>
+      <v-toolbar-title>{{ $t('bom') }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu bottom left offset-y v-if="isAuthenticated">
         <v-btn icon slot="activator">
@@ -73,6 +81,9 @@
           </v-list>
         </v-card>
       </v-menu>
+      <v-btn @click="switchLanguage" fab small flat>
+        <v-icon>flag</v-icon>{{ this.$i18n.locale }}
+      </v-btn>
     </v-toolbar>
 
     <v-content>
@@ -81,7 +92,7 @@
           <router-view v-if="isAuthenticated"></router-view>
             <div v-else>
               <div>
-                <h2>Iniciar sesión con</h2>
+                <h2>{{ $t('startSessionWith') }}</h2>
                 <div>
                   <v-btn flat @click="login('google')">
                     <v-icon>mdi-google</v-icon>
@@ -119,30 +130,35 @@ export default {
     ...mapGetters(['isAuthenticated', 'user'])
   },
   methods: {
-    ...mapActions(['login', 'logout'])
+    ...mapActions(['login', 'logout']),
+    switchLanguage() {
+      if (this.$i18n.locale == 'es') {
+        this.$i18n.locale = 'en'
+      } else {
+        this.$i18n.locale = 'es'
+      }
+    }
   },
   data() {
     return {
       drawer: null,
       menu: [
-        { to: { name: 'dashboard' }, label: 'Dashboard', icon: 'mdi-view-dashboard' },
+        { to: { name: 'dashboard' }, icon: 'mdi-view-dashboard' },
         {
           to: { name: 'configuration' },
-          label: 'Configuration',
           icon: 'mdi-settings',
           children: [
-            { to: { name: 'gear' }, label: 'Gear', icon: 'mdi-pot' },
-            { to: { name: 'water' }, label: 'Water', icon: 'mdi-water' },
-            { to: { name: 'devices' }, label: 'Devices', icon: 'mdi-desktop-classic' }
+            { to: { name: 'gear' }, icon: 'mdi-pot' },
+            { to: { name: 'water' }, icon: 'mdi-water' },
+            { to: { name: 'devices' }, icon: 'mdi-desktop-classic' }
           ]
         },
         {
           to: { name: 'tools' },
-          label: 'Tools',
           icon: 'build',
-          children: [{ to: { name: 'calculator' }, label: 'Calculator', icon: 'mdi-calculator' }]
+          children: [{ to: { name: 'calculator' }, icon: 'mdi-calculator' }]
         },
-        { to: { name: 'notifications' }, label: 'Notifications', icon: 'mdi-message' }
+        { to: { name: 'notifications' }, icon: 'mdi-message', badge: 2 }
       ]
     }
   },
