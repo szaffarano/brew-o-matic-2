@@ -130,7 +130,7 @@ export default {
     ...mapGetters(['isAuthenticated', 'user'])
   },
   methods: {
-    ...mapActions(['login', 'logout']),
+    ...mapActions(['login', 'logout', 'updateMetadata']),
     switchLanguage() {
       if (this.$i18n.locale == 'es') {
         this.$i18n.locale = 'en'
@@ -163,7 +163,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('updateMetadata')
+    this.updateMetadata()
   }
 }
 </script>

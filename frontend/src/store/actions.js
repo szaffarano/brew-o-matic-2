@@ -1,4 +1,5 @@
 import axios from 'axios'
+import * as types from './mutation-types'
 
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
@@ -10,7 +11,7 @@ export const login = ({ commit }, be) => {
 export const logout = ({ commit }) => {
   axios.get('/api/user/logout')
     .then(res => {
-      commit('logout')
+      commit(types.LOGOUT)
     })
     .catch(err => {
       console.log('Error realizando logout!')
@@ -20,7 +21,7 @@ export const logout = ({ commit }) => {
 export const updateMetadata = ({ commit }) => {
   axios.get('/api/user/metadata')
     .then(res => {
-      commit('login', res.data.user)
+      commit(types.LOGIN, res.data.user)
     })
     .catch(err => {
       console.log("Error obteniendo metadata", err)
@@ -31,7 +32,7 @@ export const getUserSettings = ({ commit }) => {
   axios
     .get('/api/user/settings')
     .then(res => {
-      commit('userSettings', res.data)
+      commit(types.USER_SETTINGS, res.data)
     })
     .catch(err => {
       console.log('Error obteniendo user-settings', err)
@@ -42,7 +43,7 @@ export const getUserSettingsMetadata = ({ commit }) => {
   axios
     .get('/api/user/settings/metadata')
     .then(res => {
-      commit('userSettingsMetadata', res.data)
+      commit(types.USER_SETTINGS_METADATA, res.data)
     })
     .catch(err => {
       console.log('Error obteniendo user-settings-metadata', err)

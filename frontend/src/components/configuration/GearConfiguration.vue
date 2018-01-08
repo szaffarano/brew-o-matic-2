@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
@@ -41,9 +41,12 @@ export default {
   computed: {
     ...mapGetters(['userSettings', 'userSettingsMetadata'])
   },
+  methods: {
+    ...mapActions(['getUserSettings', 'getUserSettingsMetadata'])
+  },
   mounted() {
-    this.$store.dispatch('getUserSettings')
-    this.$store.dispatch('getUserSettingsMetadata')
+    this.getUserSettings()
+    this.getUserSettingsMetadata()
   }
 }
 </script>

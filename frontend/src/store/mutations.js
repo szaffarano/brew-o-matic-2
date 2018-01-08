@@ -1,15 +1,19 @@
-export const login = (state, user) => {
-  state.user = user
-}
+import * as types from './mutation-types'
 
-export const logout = (state) => {
-  state.user = null
-}
+export default {
+  [types.LOGIN](state, user) {
+    state.user = user
+  },
 
-export const userSettings = (state, settings) => {
-  state.userSettings = settings
-}
+  [types.LOGOUT](state) {
+    state.user = null
+  },
 
-export const userSettingsMetadata = (state, settings) => {
-  state.userSettingsMetadata = settings
+  [types.USER_SETTINGS](state, settings) {
+    state.userSettings = settings
+  },
+
+  [types.USER_SETTINGS_METADATA](state, settings) {
+    state.userSettingsMetadata = settings
+  }
 }
