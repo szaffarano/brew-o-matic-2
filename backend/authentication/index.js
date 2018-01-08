@@ -31,7 +31,31 @@ module.exports = function(config, logger) {
       user.provider = userProfile.provider;
       user.profileId = userProfile.profileId
 
-      logger.info(`[${userProfile.provider}]`, `User ${userProfile.username} not found in db, creating...`)
+      user.singInDate = new Date();
+      user.lastLogin = new Date();
+      user.settings = {
+        "defaultValues": {
+          "BATCH_SIZE": 20,
+          "EFFICIENCY": 70,
+          "BREWER": user.name,
+          "BOIL_TIME": 90,
+          "GrainTemp": 25,
+          "WatertoGrainRatio": 3,
+          "mashTemp": 66,
+          "lossMashTemp": 0,
+          "SpargeTempDesired": 75,
+          "SpargeDeadSpace": 0,
+          "GrainAbsorbtion": 0.9,
+          "PercentEvap": 10,
+          "TrubChillerLosses": 0,
+          "isPublic": false,
+          "pitchRate": 0.75
+        }
+      };
+
+      logger.info(
+        `[${userProfile.provider}]`,
+        `User ${userProfile.username} not found in db, creating...`)
 
       user.save(function(err) {
         if (err) {

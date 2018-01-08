@@ -11,8 +11,12 @@ async function defineAbilitiesFor(user) {
 
   if (user) {
     can('create', 'Recipe')
-    can('update', 'Recipe', { owner: user.id })
-    can('delete', 'Recipe', { owner: user.id })
+    can('update', 'Recipe', { owner: user._id })
+    can('delete', 'Recipe', { owner: user._id })
+
+    can('read', 'User', { _id: user._id })
+    can('update', 'User', { _id: user._id })
+    can('read', 'Settings', { _id: user._id })
   }
 
   return new Ability(rules)
