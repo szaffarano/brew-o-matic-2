@@ -1,5 +1,5 @@
 <template>
-  <p>Cebada is alive!</p>
+  <p>{{ $t('devices') }}</p>
 </template>
 <script>
 export default {}

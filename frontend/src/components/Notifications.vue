@@ -1,5 +1,5 @@
 <template>
-  <p>bla bla...</p>
+  <p>{{ $t('notifications') }}</p>
 </template>
 
 <script>

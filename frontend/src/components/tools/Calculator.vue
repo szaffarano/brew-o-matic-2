@@ -1,5 +1,5 @@
 <template>
-  <p>Do you have to do some math?</p>
+  <p>{{ $t('calculator') }}</p>
 </template>
 
 <script>

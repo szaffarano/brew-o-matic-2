@@ -1,9 +1,8 @@
 <template>
-  <p>The magic begins here...</p>
+<p>{{ $t('dashboard') }}</p>
 </template>
 
 <script>
-export default {}
 </script>
 
 <style scoped>

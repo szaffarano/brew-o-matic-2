@@ -1,5 +1,5 @@
 <template>
-  <p>Water information</p>
+  <p>{{ $t('water') }}</p>
 </template>
 <script>
 export default {}
