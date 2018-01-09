@@ -34,7 +34,6 @@ module.exports = function(config, logger) {
           res.send(500, { error: err });
         } else {
           user.settings = req.body;
-          user.name = req.body.name;
 
           user.save(function(err, resp) {
             if (err) {
