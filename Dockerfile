@@ -12,7 +12,7 @@ COPY frontend /tmp/frontend
 RUN \
     cd /tmp/frontend && \
     yarn build && \
-    cp -R dist/* /usr/src/app && \
+    cp -R dist/* /usr/src/app/public && \
     rm -rf /tmp/frontend
 
 EXPOSE 3000
