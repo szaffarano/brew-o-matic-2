@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Dashboard from '@/components/Dashboard'
-import Notifications from '@/components/NotificationsBoard'
-import Devices from '@/components/configuration/DevicesConfiguration'
-import Gear from '@/components/configuration/GearConfiguration'
-import Water from '@/components/configuration/WaterSetup'
-import Calculator from '@/components/tools/Calculator'
+import Dashboard from '@/components/AppDashboard'
+import Notifications from '@/components/AppNotifications'
+import Devices from '@/components/configuration/AppDevicesConfig'
+import Gear from '@/components/configuration/AppGearConfig'
+import Water from '@/components/configuration/AppWaterConfig'
+import Calculator from '@/components/tools/AppCalculator'
 
 
 Vue.use(Router)
