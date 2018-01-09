@@ -14,10 +14,14 @@ import 'vuetify/dist/vuetify.css'
 import 'font-awesome/css/font-awesome.css'
 import 'mdi/css/materialdesignicons.css'
 
+import AppMessages from './components/AppMessages'
+
 Vue.config.productionTip = false
 
 Vue.use(Vuetify)
 Vue.use(VueI18n)
+
+Vue.component('app-messages', AppMessages)
 
 const i18n = new VueI18n({ locale: 'es', messages })
 
