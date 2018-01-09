@@ -28,6 +28,11 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <v-layout>
+      <v-spacer></v-spacer>
+      <v-btn @click="saveUserSettings(userSettings)" color="primary">{{ $t('save') }}</v-btn>
+    </v-layout>
+    <app-messages></app-messages>
   </v-container>
 </template>
 
@@ -39,10 +44,14 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters(['userSettings', 'userSettingsMetadata'])
+    ...mapGetters(['userSettings', 'userSettingsMetadata', 'appStatus'])
   },
   methods: {
-    ...mapActions(['getUserSettings', 'getUserSettingsMetadata'])
+    ...mapActions([
+      'getUserSettings',
+      'getUserSettingsMetadata',
+      'saveUserSettings'
+    ])
   },
   mounted() {
     this.getUserSettings()

@@ -15,5 +15,9 @@ export default {
 
   [types.USER_SETTINGS_METADATA](state, settings) {
     state.userSettingsMetadata = settings
+  },
+
+  [types.APP_STATUS](state, status) {
+    state.appStatus = status
   }
 }

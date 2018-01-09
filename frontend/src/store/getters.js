@@ -13,3 +13,7 @@ export const userSettings = (state) => {
 export const userSettingsMetadata = (state) => {
   return state.userSettingsMetadata
 }
+
+export const appStatus = (state) => {
+  return state.appStatus
+}

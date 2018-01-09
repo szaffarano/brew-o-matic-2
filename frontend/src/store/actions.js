@@ -14,7 +14,13 @@ export const logout = ({ commit }) => {
       commit(types.LOGOUT)
     })
     .catch(err => {
-      console.log('Error realizando logout!')
+      // @TODO better error handling
+      console.log(err)
+
+      commit(types.APP_STATUS, {
+        message: 'error-logout',
+        error: true
+      })
     })
 }
 
@@ -24,7 +30,12 @@ export const updateMetadata = ({ commit }) => {
       commit(types.LOGIN, res.data.user)
     })
     .catch(err => {
-      console.log("Error obteniendo metadata", err)
+      console.log(err)
+
+      commit(types.APP_STATUS, {
+        message: 'error-getting-metadata',
+        error: true
+      })
     })
 }
 
@@ -35,7 +46,11 @@ export const getUserSettings = ({ commit }) => {
       commit(types.USER_SETTINGS, res.data)
     })
     .catch(err => {
-      console.log('Error obteniendo user-settings', err)
+      console.log(err)
+      commit(types.APP_STATUS, {
+        message: 'error-getting-user-settings',
+        error: true
+      })
     })
 }
 
@@ -46,6 +61,31 @@ export const getUserSettingsMetadata = ({ commit }) => {
       commit(types.USER_SETTINGS_METADATA, res.data)
     })
     .catch(err => {
-      console.log('Error obteniendo user-settings-metadata', err)
+      console.log(err)
+      commit(types.APP_STATUS, {
+        message: 'error-getting-user-settings-metadata',
+        error: true
+      })
     })
+}
+
+export const saveUserSettings = ({ commit }, userSettings) => {
+  axios
+    .put('/api/user/settings', userSettings)
+    .then(res => {
+      commit(types.APP_STATUS, {
+        message: 'user-settings-update-ok'
+      })
+    })
+    .catch(err => {
+      console.log('Error obteniendo user-settings-metadata', err)
+      commit(types.APP_STATUS, {
+        message: 'error-on-update-user-settings',
+        error: true
+      })
+    })
+}
+
+export const clearAppStatus = ({ commit }) => {
+  commit(types.APP_STATUS, {})
 }
