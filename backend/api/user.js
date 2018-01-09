@@ -25,7 +25,7 @@ module.exports = function(config, logger) {
   });
 
   router.put('/settings', hasSession, function(req, res) {
-    req.ability.throwUnlessCan('update', 'Settings')
+    req.ability.throwUnlessCan('update', 'User')
 
     User.findOne({ _id: req.user._id },
       function(err, user) {
@@ -33,11 +33,14 @@ module.exports = function(config, logger) {
           logger.error("Error finding user", err);
           res.send(500, { error: err });
         } else {
-          user.settings = req.body.settings;
+          user.settings = req.body;
           user.name = req.body.name;
 
           user.save(function(err, resp) {
-            logger.error("Error updating settings", err);
+            if (err) {
+              logger.error("Error updating settings", err);
+            }
+
             res.send(user);
             //@TODO: ver mecanismo de actions
             // actions.log(req.session.user_id, "UPDATE_SETTINGS", "User: " + user.name);
