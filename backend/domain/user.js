@@ -49,30 +49,121 @@ const UserSchema = new Schema({
   accessCode: String,
   settings: {
     defaultValues: {
-      BATCH_SIZE: Number,
-      EFFICIENCY: Number,
-      BREWER: String,
-      BOIL_TIME: Number,
-      GrainTemp: Number,
-      WatertoGrainRatio: Number,
-      mashTemp: Number,
-      lossMashTemp: Number,
-      SpargeTempDesired: Number,
-      SpargeDeadSpace: Number,
-      GrainAbsorbtion: Number,
-      PercentEvap: Number,
-      LitersEvap: Number,
-      TrubChillerLosses: Number,
+      BATCH_SIZE: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      EFFICIENCY: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      BREWER: {
+        type: String,
+        required: true
+      },
+      BOIL_TIME: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      GrainTemp: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      WatertoGrainRatio: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      mashTemp: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      lossMashTemp: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      SpargeTempDesired: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      SpargeDeadSpace: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      GrainAbsorbtion: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      PercentEvap: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      LitersEvap: {
+        type: Number,
+        required: false,
+        min: 0
+      },
+      TrubChillerLosses: {
+        type: Number,
+        required: true,
+        min: 0
+      },
       isPublic: Boolean,
-      pitchRate: Number,
-      phPreBoil: Number,
-      phPostBoil: Number,
-      SpargeWhaterDesiredPH: Number,
-      MashDesiredPH: Number,
-      timeWaterMash: Number,
-      spargeDuration: Number,
-      preBoilTime: Number,
-      coolingTime: Number
+      pitchRate: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+      phPreBoil: {
+        type: Number,
+        required: false,
+        min: 0
+      },
+      phPostBoil: {
+        type: Number,
+        required: false,
+        min: 0
+      },
+      SpargeWhaterDesiredPH: {
+        type: Number,
+        required: false,
+        min: 0
+      },
+      MashDesiredPH: {
+        type: Number,
+        required: false,
+        min: 0
+      },
+      timeWaterMash: {
+        type: Number,
+        required: false,
+        min: 0
+      },
+      spargeDuration: {
+        type: Number,
+        required: false,
+        min: 0
+      },
+      preBoilTime: {
+        type: Number,
+        required: false,
+        min: 0
+      },
+      coolingTime: {
+        type: Number,
+        required: false,
+        min: 0
+      }
     },
     closeUseSurvey: Boolean,
     gotoFanPage: Boolean
