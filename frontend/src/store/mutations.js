@@ -18,6 +18,29 @@ export default {
   },
 
   [types.APP_STATUS](state, status) {
-    state.appStatus = status
+    if (status.message) {
+      state.appStatus.push({ message: status.message })
+    } else if (status.error) {
+      if (status.error.response) {
+        status.error.response.data.forEach(err => {
+          state.appStatus.push({
+            message: err.kind,
+            path: err.path,
+            properties: err.properties ? err.properties : {}
+          })
+        });
+      } else {
+        state.appStatus.push({
+          key: 'unhandled-error'
+        })
+      }
+    }
+
+    /* eslint-disable no-console */
+    console.log("status", status)
+  },
+
+  [types.CLEAR_APP_STATUS](state) {
+    state.appStatus = []
   }
 }
