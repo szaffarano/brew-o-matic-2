@@ -18,6 +18,7 @@ export default {
     'user-settings-update-ok': 'User setings successfully updated',
     'mongoose-Number': 'The field "{path}" must be a number',
     'mongoose-min': 'The field "{path}" has to be greater or equal than {min}',
+    'mongoose-required': 'The field "{path}" is required',
 
     settings: {
       defaultValues: {
@@ -68,6 +69,7 @@ export default {
     'user-settings-update-ok': 'La configuración fue actualizada exitosamente',
     'mongoose-Number': 'El campo "{path}" debe ser numérico',
     'mongoose-min': 'El campo "{path}" tiene que ser mayor a {min}',
+    'mongoose-required': 'El campo "{path}" es requerido',
 
     settings: {
       defaultValues: {
