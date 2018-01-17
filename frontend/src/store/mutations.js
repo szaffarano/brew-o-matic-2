@@ -35,9 +35,6 @@ export default {
         })
       }
     }
-
-    /* eslint-disable no-console */
-    console.log("status", status)
   },
 
   [types.CLEAR_APP_STATUS](state) {
