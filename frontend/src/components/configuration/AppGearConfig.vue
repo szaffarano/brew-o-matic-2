@@ -4,7 +4,7 @@
         <v-layout row wrap v-if="userSettingsMetadata && userSettings.defaultValues">
           <v-flex xs12>
             <div class="text-xs-center">
-              <h2 class="headline">Valores por defecto en tus recetas</h2>
+              <h2 class="headline">{{ $t('gear-config.title')}}</h2>
             </div>
           </v-flex>
             <v-flex xl3 lg3 md4 sm5 xs6 v-for="(v, k) in userSettingsMetadata" :key="k">
