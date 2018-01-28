@@ -5,4 +5,5 @@ export default {
   logout: 'Logout',
   save: 'Save',
   close: 'Close',
+  cancel: 'Cancel',
 }

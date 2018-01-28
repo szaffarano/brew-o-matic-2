@@ -7,7 +7,7 @@ import Devices from '@/components/configuration/AppDevicesConfig'
 import Gear from '@/components/configuration/AppGearConfig'
 import Water from '@/components/configuration/AppWaterConfig'
 import Calculator from '@/components/tools/AppCalculator'
-
+import AddRecipe from '@/components/AppAddRecipe'
 
 Vue.use(Router)
 
@@ -20,7 +20,10 @@ export default new Router({
     {
       path: '/dashboard',
       name: 'dashboard',
-      component: Dashboard
+      components: {
+        default: Dashboard,
+        buttons: AddRecipe
+      }
     },
     {
       path: '/notifications',

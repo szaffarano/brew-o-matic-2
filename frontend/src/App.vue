@@ -87,34 +87,36 @@
     </v-toolbar>
 
     <v-content>
-      <v-container fluid >
+      <v-container fluid fill-height>
         <v-layout justify-center align-center>
           <router-view v-if="isAuthenticated"></router-view>
-            <div v-else>
+          <div v-else>
+            <div>
+              <h2>{{ $t('startSessionWith') }}</h2>
               <div>
-                <h2>{{ $t('startSessionWith') }}</h2>
-                <div>
-                  <v-btn flat @click="login('google')">
-                    <v-icon>mdi-google</v-icon>
-                  </v-btn>
-                  <v-btn flat @click="login('twitter')">
-                    <v-icon>mdi-twitter</v-icon>
-                  </v-btn>
-                  <v-btn flat @click="login('facebook')">
-                    <v-icon>mdi-facebook</v-icon>
-                  </v-btn>
-                  <v-btn flat @click="login('github')">
-                    <v-icon>mdi-github-box</v-icon>
-                  </v-btn>
-                  <v-btn flat @click="login('linkedin')">
-                    <v-icon>mdi-linkedin</v-icon>
-                  </v-btn>
-                </div>
+                <v-btn flat @click="login('google')">
+                  <v-icon>mdi-google</v-icon>
+                </v-btn>
+                <v-btn flat @click="login('twitter')">
+                  <v-icon>mdi-twitter</v-icon>
+                </v-btn>
+                <v-btn flat @click="login('facebook')">
+                  <v-icon>mdi-facebook</v-icon>
+                </v-btn>
+                <v-btn flat @click="login('github')">
+                  <v-icon>mdi-github-box</v-icon>
+                </v-btn>
+                <v-btn flat @click="login('linkedin')">
+                  <v-icon>mdi-linkedin</v-icon>
+                </v-btn>
               </div>
             </div>
+          </div>
         </v-layout>
       </v-container>
     </v-content>
+
+    <router-view v-if="isAuthenticated" name="buttons"></router-view>
 
     <v-footer app fixed>
       <span>&copy; 2017 - Somos Cerveceros</span>
@@ -169,4 +171,5 @@ export default {
 </script>
 
 <style>
+
 </style>
