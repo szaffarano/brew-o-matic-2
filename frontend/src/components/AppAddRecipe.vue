@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-btn fab bottom right color="pink" fixed @click.stop="showForm = true">
+    <v-btn fab bottom right color="pink" fixed @click.stop="showForm = true" class="mb-3">
       <v-icon>add</v-icon>
     </v-btn>
 

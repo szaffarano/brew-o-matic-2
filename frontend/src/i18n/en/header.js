@@ -6,4 +6,6 @@ export default {
   save: 'Save',
   close: 'Close',
   cancel: 'Cancel',
+  'fork-message': 'Fork us on github',
+  'repo-url': 'https://github.com/szaffarano/brew-o-matic',
 }

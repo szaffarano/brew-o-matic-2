@@ -119,7 +119,14 @@
     <router-view v-if="isAuthenticated" name="buttons"></router-view>
 
     <v-footer app fixed>
-      <span>&copy; 2017 - Somos Cerveceros</span>
+      <span>&copy; {{ new Date().getYear() + 1900 }} - Somos Cerveceros</span>
+      <v-spacer></v-spacer>
+      <v-tooltip top>
+        <a :href="$t('repo-url')" target="_new" class="fork-git" slot="activator">
+          <v-icon>mdi-github-circle</v-icon>
+        </a>
+        <span>{{ $t('fork-message') }}</span>
+      </v-tooltip>
     </v-footer>
   </v-app>
 </template>
@@ -134,16 +141,18 @@ export default {
   methods: {
     ...mapActions(['login', 'logout', 'updateMetadata']),
     switchLanguage() {
-      if (this.$i18n.locale == 'es') {
-        this.$i18n.locale = 'en'
-      } else {
-        this.$i18n.locale = 'es'
-      }
+      const i18n = this.$i18n
+      const locales = this.locales
+
+      i18n.locale = this.locales[
+        (locales.indexOf(i18n.locale) + 1) % locales.length
+      ]
     }
   },
   data() {
     return {
       drawer: null,
+      locales: ['es', 'en'],
       menu: [
         { to: { name: 'dashboard' }, icon: 'mdi-view-dashboard' },
         {
@@ -170,6 +179,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.fork-git:link {
+  text-decoration: none;
+}
 
+.fork-git:visited {
+  text-decoration: none;
+}
+
+.fork-git:hover {
+  text-decoration: none;
+}
+
+.fork-git:active {
+  text-decoration: none;
+}
 </style>
