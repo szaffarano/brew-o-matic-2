@@ -8,6 +8,7 @@ module.exports = function(config, logger) {
   });
 
   router.use('/user', require('./user')(config, logger));
+  router.use('/data', require('./data')(config, logger));
 
   return router
 }
