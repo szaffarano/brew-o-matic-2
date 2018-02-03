@@ -1,6 +1,5 @@
 'use strict'
 
-
 module.exports = function(config, logger) {
   const User = require('../domain/user')
   const { handleBusinessError } = require('./utils')(logger)
@@ -29,19 +28,19 @@ module.exports = function(config, logger) {
           if (err) {
             handleBusinessError('finding user settings', err, res)
           } else {
-            user.settings = req.body;
+            user.settings = req.body
 
             user.save(function(err, resp) {
               if (err) {
                 handleBusinessError('updating user settings', err, res)
               } else {
-                res.send(user);
+                res.send(user)
                 //@TODO: see actions logic in BoM 1
-                // actions.log(req.session.user_id, "UPDATE_SETTINGS", "User: " + user.name);
+                // actions.log(req.session.user_id, "UPDATE_SETTINGS", "User: " + user.name)
               }
-            });
+            })
           }
-        });
+        })
     },
 
     getUserSettings(req, res) {
@@ -57,7 +56,7 @@ module.exports = function(config, logger) {
               user.settings
             )
           }
-        });
+        })
     },
 
     getUserSettingsMetadata(req, res) {
@@ -74,9 +73,9 @@ module.exports = function(config, logger) {
             validators: path.validators
           }
         }
-      });
+      })
 
-      res.json(metadata);
+      res.json(metadata)
     }
 
   }
