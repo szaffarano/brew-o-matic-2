@@ -17,3 +17,22 @@ export const userSettingsMetadata = (state) => {
 export const appStatus = (state) => {
   return state.appStatus
 }
+
+export const dataBottles = (state) => {
+  return state.data.bottles
+}
+export const dataGrains = (state) => {
+  return state.data.grains
+}
+export const dataHops = (state) => {
+  return state.data.hops
+}
+export const dataMiscs = (state) => {
+  return state.data.miscs
+}
+export const dataStyles = (state) => {
+  return state.data.styles
+}
+export const dataYeasts = (state) => {
+  return state.data.yeasts
+}

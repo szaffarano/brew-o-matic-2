@@ -11,7 +11,8 @@ const state = {
   user: {},
   userSettings: {},
   userSettingsMetadata: {},
-  appStatus: []
+  appStatus: [],
+  data: {},
 }
 
 export default new Vuex.Store({
