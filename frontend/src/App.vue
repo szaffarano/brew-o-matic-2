@@ -118,6 +118,8 @@
 
     <router-view v-if="isAuthenticated" name="buttons"></router-view>
 
+    <app-messages></app-messages>
+
     <v-footer app fixed>
       <span>&copy; {{ new Date().getYear() + 1900 }} - Somos Cerveceros</span>
       <v-spacer></v-spacer>

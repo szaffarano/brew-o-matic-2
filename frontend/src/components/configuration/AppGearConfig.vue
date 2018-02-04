@@ -25,7 +25,6 @@
             color="primary">{{ $t('save') }}
           </v-btn>
         </v-layout>
-        <app-messages></app-messages>
       </v-form>
   </v-container>
 </template>
