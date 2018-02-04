@@ -12,10 +12,10 @@ const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const flash = require("express-flash");
 const MongoStore = require("connect-mongo")(session);
-
-const errorHandler = require('./utils/error-handler')
+const createError = require('http-errors')
 
 module.exports = function(config, db, logger) {
+  const errorHandler = require('./utils/error-handler')
   const api = require('./api');
   const authentication = require('./authentication');
   const abilities = require('./authorization/abilities');
@@ -81,9 +81,7 @@ module.exports = function(config, db, logger) {
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+    next(createError(404, `${req.path} not found`));
   });
 
   app.use(errorHandler);

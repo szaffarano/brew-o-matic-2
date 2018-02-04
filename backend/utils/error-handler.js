@@ -26,6 +26,7 @@ module.exports = function errorHandler(error, req, res, next) {
     statusCode = 400
   }
 
-  res.status(statusCode)
+  res
+    .status(statusCode)
     .send(toJSON(error, { withStack: req.app.get('env') === 'development' }))
 }
