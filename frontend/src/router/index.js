@@ -7,7 +7,7 @@ import Devices from '@/components/configuration/AppDevicesConfig'
 import Gear from '@/components/configuration/AppGearConfig'
 import Water from '@/components/configuration/AppWaterConfig'
 import Calculator from '@/components/tools/AppCalculator'
-import AddRecipe from '@/components/AppAddRecipe'
+import AddRecipe from '@/components/recipe/RecipeAdd'
 
 Vue.use(Router)
 

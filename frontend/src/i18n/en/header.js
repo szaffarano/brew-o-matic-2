@@ -8,4 +8,6 @@ export default {
   cancel: 'Cancel',
   'fork-message': 'Fork us on github',
   'repo-url': 'https://github.com/szaffarano/brew-o-matic',
+  'get-runtime-error': 'Unexpected error getting {object}',
+  'get-not-found': 'Object {object} not found',
 }
