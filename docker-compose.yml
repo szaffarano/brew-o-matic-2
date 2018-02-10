@@ -2,15 +2,18 @@ version: "3"
 services:
   mongo:
     image: mongo:3.6-jessie
+    container_name: mongo
     networks:
       - backend
     ports:
       - 27017:27017
     volumes:
       - db-data:/data/db
+      - db-conf:/data/configdb
 
   bom:
     image: szaffarano/brew-o-matic
+    container_name: bom
     ports:
       - 80:3000
     networks:
@@ -29,3 +32,4 @@ networks:
 
 volumes:
   db-data:
+  db-conf:
