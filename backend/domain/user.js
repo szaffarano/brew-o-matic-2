@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     unique: true,
     index: true,
     lowercase: true,
-    required: "Username is required",
+    required: 'Username is required',
     trim: true
   },
   email: {
@@ -27,19 +27,19 @@ const UserSchema = new Schema({
     unique: true,
     index: true,
     lowercase: true,
-    "default": "",
-    match: [/.+@.+\..+/, "Please fill a valid email address"]
+    'default': '',
+    match: [/.+@.+\..+/, 'Please fill a valid email address']
   },
   roles: {
     type: [{
       type: String,
-      "enum": [
+      'enum': [
         C.ROLE_ADMIN,
         C.ROLE_USER,
         C.ROLE_GUEST
       ]
     }],
-    "default": [C.ROLE_USER]
+    'default': [C.ROLE_USER]
   },
 
   name: String,
@@ -171,4 +171,4 @@ const UserSchema = new Schema({
 
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);

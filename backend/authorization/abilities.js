@@ -1,11 +1,12 @@
 'use strict'
 
+/* jshint ignore:start */
 const { AbilityBuilder, Ability } = require('casl')
 
 const ANONYMOUS = defineAbilitiesFor(null)
 
 async function defineAbilitiesFor(user) {
-  const { rules, can, cannot } = AbilityBuilder.extract()
+  const { rules, can } = AbilityBuilder.extract()
 
   can('read', 'Metadata')
 
@@ -22,7 +23,8 @@ async function defineAbilitiesFor(user) {
   return new Ability(rules)
 }
 
-module.exports = async(req, res, next) => {
+module.exports = async (req, res, next) => {
   req.ability = req.user ? await defineAbilitiesFor(req.user) : await ANONYMOUS
   next()
 }
+/* jshint ignore:end */

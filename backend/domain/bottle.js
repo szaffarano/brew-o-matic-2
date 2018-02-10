@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
@@ -10,4 +10,4 @@ const BottleSchema = new Schema({
   colour: String //'Ambar', 'Verde', 'Blanca'
 })
 
-module.exports = mongoose.model("Bottle", BottleSchema)
+module.exports = mongoose.model('Bottle', BottleSchema)

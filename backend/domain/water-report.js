@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
@@ -70,4 +70,4 @@ const WaterReportSchema = new Schema({
   versionKey: false
 })
 
-module.exports = mongoose.model("WaterReport", WaterReportSchema)
+module.exports = mongoose.model('WaterReport', WaterReportSchema)

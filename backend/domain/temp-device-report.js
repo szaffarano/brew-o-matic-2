@@ -16,4 +16,4 @@ const TempDeviceReportSchema = new Schema({
   heatStatus: Boolean //status switch calor
 })
 
-module.exports = mongoose.model("TempDeviceReport", TempDeviceReportSchema)
+module.exports = mongoose.model('TempDeviceReport', TempDeviceReportSchema)
