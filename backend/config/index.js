@@ -7,10 +7,11 @@ const path = require("path");
 const _ = require("lodash");
 
 /* eslint-disable no-console */
-/* global WEBPACK_BUNDLE */
 /* eslint-disable node/no-unpublished-require */
 
 global.rootPath = path.normalize(path.join(__dirname, ".."));
+
+/* global WEBPACK_BUNDLE */
 if (WEBPACK_BUNDLE) {
   let bundleFullPath;
   if (process.argv.length > 0) {
@@ -30,17 +31,16 @@ let baseConfig = require('./base')
 if (WEBPACK_BUNDLE) {
   externalConfig = require("../config.js");
 } else {
-  console.info(chalk.yellow.bold(`Reading external configuration '${extConfigFile}'`))
+  console.info(
+    chalk.yellow.bold(`Trying to read external configuration '${extConfigFile}'`)
+  )
   if (!fs.existsSync(extConfigFile)) {
-    const msg = `Configuration file: '${extConfigFile}' not found`
-    console.error(chalk.red.bold(msg))
-    throw new Error(msg)
+    console.warn(
+      chalk.red.bold(`Configuration file: '${extConfigFile}' not found`)
+    )
   }
   externalConfig = require(extConfigFile);
 }
-
-/* eslint-enable no-console */
-/* eslint-enable node/no-unpublished-require */
 
 const modes = {
   isDevMode() {
@@ -83,5 +83,7 @@ const strategies = {
       this.auth.linkedin.clientSecret
   }
 }
+/* eslint-enable no-console */
+/* eslint-enable node/no-unpublished-require */
 
 module.exports = _.defaultsDeep(externalConfig, baseConfig, modes, strategies)
