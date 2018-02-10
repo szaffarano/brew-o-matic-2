@@ -4,6 +4,7 @@
       <v-text-field
         :label="label"
         :value="value"
+        type="number"
         :rules="rules"
         @input="$emit('updateValue', $event)"
       ></v-text-field>
@@ -11,6 +12,7 @@
   <span v-if="field.type == 'String'">
     <v-text-field
       :label="label"
+      type="string"
       :value="value"
       :rules="rules"
       @input="$emit('updateValue', $event)"
@@ -74,7 +76,7 @@ export default {
         min: (name, validator) => v => {
           return (
             !v ||
-            v >= validator.min ||
+            v > validator.min ||
             this.$t('mongoose-min', { path: name, ...validator })
           )
         }
