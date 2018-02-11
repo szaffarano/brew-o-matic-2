@@ -1,7 +1,12 @@
 'use strict';
 
-module.exports = function(router, config, createUser, logger) {
-  if (config.configureTwitter()) {
+const config = require('config')
+const logger = require('../utils/logger')
+const authUtils = require('./utils')
+
+module.exports = function(router) {
+
+  if (authUtils.strategies.configureTwitter()) {
     const passport = require('passport')
     const TwitterStrategy = require('passport-twitter').Strategy
     const chalk = require('chalk');
@@ -23,7 +28,7 @@ module.exports = function(router, config, createUser, logger) {
         provider: C.PROVIDER_TWITTER,
         profileId: profile.id,
       }
-      createUser(req, userProfile, cb)
+      authUtils.createUser(req, userProfile, cb)
     }));
 
     router.get('/twitter', passport.authenticate('twitter'));
@@ -33,4 +38,7 @@ module.exports = function(router, config, createUser, logger) {
         failureRedirect: '/login'
       }));
   }
+  router.get("/twitter/supported", (req, res) => {
+    res.json({ supported: authUtils.strategies.configureTwitter() })
+  })
 }

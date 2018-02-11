@@ -1,14 +1,12 @@
-module.exports = function(config, logger) {
-  const express = require('express');
+const express = require('express');
 
-  const router = express.Router();
+const router = express.Router();
 
-  router.get('/', function(req, res, next) {
-    res.json({ success: 'true' })
-  });
+router.get('/', function(req, res, next) {
+  res.json({ success: 'true' })
+});
 
-  router.use('/user', require('./user')(config, logger));
-  router.use('/data', require('./data')(config, logger));
+router.use('/user', require('./user'));
+router.use('/data', require('./data'));
 
-  return router
-}
+module.exports = router

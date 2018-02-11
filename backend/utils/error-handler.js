@@ -12,7 +12,7 @@ function toJSON(err, options = {}) {
   return object
 }
 
-module.exports = function errorHandler(error, req, res, next) {
+module.exports = function errorHandler(error, req, res) {
   if (error instanceof ForbiddenError) {
     return res.status(403).send({
       status: 'forbidden',

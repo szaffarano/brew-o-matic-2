@@ -2,17 +2,20 @@
   "name": "bom-backend",
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "main": "app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --inspect",
     "start": "cross-env NODE_ENV=production node app.js",
     "build": "webpack --progress --colors --config build/webpack.config.js"
   },
+  "bin": "app.js",
   "dependencies": {
     "body-parser": "~1.18.2",
     "casl": "^1.0.3",
     "chalk": "^2.3.0",
     "compression": "^1.7.1",
+    "config": "^1.29.4",
     "connect-mongo": "^2.0.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",

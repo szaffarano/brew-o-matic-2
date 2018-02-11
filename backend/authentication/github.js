@@ -1,7 +1,11 @@
 'use strict';
 
-module.exports = function(router, config, createUser, logger) {
-  if (config.configureGithub()) {
+const config = require('config')
+const logger = require('../utils/logger')
+const authUtils = require('./utils')
+
+module.exports = function(router) {
+  if (authUtils.strategies.configureGithub()) {
     const passport = require('passport')
     const GitHubStrategy = require('passport-github2').Strategy;
     const chalk = require('chalk');
@@ -25,19 +29,22 @@ module.exports = function(router, config, createUser, logger) {
           profileId: profile.id,
         }
 
-        createUser(req, userProfile, cb)
+        authUtils.authUtils.createUser(req, userProfile, cb)
       }
     ));
 
-    router.get("/github", passport.authenticate("github", {
+    router.get('/github', passport.authenticate('github', {
       scope: ['user:email']
     }));
 
-    router.get("/github/callback", passport.authenticate("github", {
+    router.get('/github/callback', passport.authenticate('github', {
       successRedirect: '/#/',
-      failureRedirect: "/login"
+      failureRedirect: '/login'
     }));
 
   }
 
+  router.get('/github/supported', (req, res) => {
+    res.json({ supported: authUtils.strategies.configureGithub() })
+  })
 }

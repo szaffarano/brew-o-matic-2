@@ -1,10 +1,14 @@
-'use strict';
+'use strict'
 
-module.exports = function(router, config, createUser, logger) {
-  if (config.configureLinkedIn()) {
+const config = require('config')
+const logger = require('../utils/logger')
+const authUtils = require('./utils')
+
+module.exports = function(router) {
+  if (authUtils.strategies.configureLinkedIn()) {
     const passport = require('passport')
-    const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
-    const chalk = require('chalk');
+    const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy
+    const chalk = require('chalk')
 
     const C = require('../utils/constants')
 
@@ -26,17 +30,19 @@ module.exports = function(router, config, createUser, logger) {
           profileId: profile.id,
         }
 
-        createUser(req, userProfile, cb)
+        authUtils.createUser(req, userProfile, cb)
       }
-    ));
+    ))
 
-    router.get("/linkedin", passport.authenticate("linkedin"));
+    router.get('/linkedin', passport.authenticate('linkedin'))
 
-    router.get("/linkedin/callback", passport.authenticate("linkedin", {
+    router.get('/linkedin/callback', passport.authenticate('linkedin', {
       successRedirect: '/#/',
-      failureRedirect: "/login"
-    }));
+      failureRedirect: '/login'
+    }))
 
   }
-
+  router.get('/linkedin/supported', (req, res) => {
+    res.json({ supported: authUtils.strategies.configureLinkedIn() })
+  })
 }

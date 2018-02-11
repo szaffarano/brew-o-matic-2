@@ -54,8 +54,8 @@ module.exports = {
       httpOnly: true,
       secure: false
     },
-    name: '',
-    collection: '',
-    secret: ''
+    name: 'DevSessions',
+    collection: 'sessions',
+    secret: 'changeme'
   },
 }

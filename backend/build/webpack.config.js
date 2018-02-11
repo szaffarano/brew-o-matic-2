@@ -28,10 +28,6 @@ module.exports = {
     filename: 'server.js'
   },
 
-  externals: {
-    '../config.js': 'commonjs ./config.js',
-  },
-
   plugins: [
     new webpack.DefinePlugin({
       WEBPACK_BUNDLE: true,

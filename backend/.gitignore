@@ -34,3 +34,8 @@ config.js
 
 # Build directory
 dist
+
+config/production*
+config/local*
+
+build/.tmp
