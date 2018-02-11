@@ -10,4 +10,5 @@ export default {
   'repo-url': 'https://github.com/szaffarano/brew-o-matic',
   'get-runtime-error': 'Error inesperado obteniendo {object}',
   'get-not-found': 'No se encontro el objeto {object}',
+  'not-found': 'Recurso no encontrado'
 }

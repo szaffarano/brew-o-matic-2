@@ -91,22 +91,22 @@
         <v-layout justify-center align-center>
           <router-view v-if="isAuthenticated"></router-view>
           <div v-else>
-            <div>
+            <div class="text-xs-center">
               <h2>{{ $t('startSessionWith') }}</h2>
               <div>
-                <v-btn flat @click="login('google')">
+                <v-btn flat @click="login('google')" v-if='supportedAuth.google'>
                   <v-icon>mdi-google</v-icon>
                 </v-btn>
-                <v-btn flat @click="login('twitter')">
+                <v-btn flat @click="login('twitter')" v-if='supportedAuth.twitter'>
                   <v-icon>mdi-twitter</v-icon>
                 </v-btn>
-                <v-btn flat @click="login('facebook')">
+                <v-btn flat @click="login('facebook')" v-if='supportedAuth.facebook'>
                   <v-icon>mdi-facebook</v-icon>
                 </v-btn>
-                <v-btn flat @click="login('github')">
+                <v-btn flat @click="login('github')" v-if='supportedAuth.github'>
                   <v-icon>mdi-github-box</v-icon>
                 </v-btn>
-                <v-btn flat @click="login('linkedin')">
+                <v-btn flat @click="login('linkedin')" v-if='supportedAuth.linkedin'>
                   <v-icon>mdi-linkedin</v-icon>
                 </v-btn>
               </div>
@@ -138,7 +138,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['isAuthenticated', 'user'])
+    ...mapGetters(['isAuthenticated', 'user', 'supportedAuth'])
   },
   methods: {
     ...mapActions(['login', 'logout', 'updateMetadata']),

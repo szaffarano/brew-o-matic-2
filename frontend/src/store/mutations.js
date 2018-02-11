@@ -32,13 +32,15 @@ export default {
           case 500:
             state.appStatus.push({
               message: safe_append(key, 'runtime-error'),
-              properties: status.object ? { object: status.object } : {}
+              properties: status.object ? { object: status.object } : {},
+              error: true,
             })
             break
           case 404:
             state.appStatus.push({
               message: safe_append(key, 'not-found'),
-              properties: status.object ? { object: status.object } : {}
+              properties: status.object ? { object: status.object } : {},
+              error: true,
             })
             break
           default:
@@ -46,12 +48,12 @@ export default {
               state.appStatus.push({
                 message: err.kind,
                 path: err.path,
-                properties: err.properties ? err.properties : {}
+                properties: err.properties ? err.properties : {},
+                error: true,
               })
             });
         }
       } else {
-        console.log("generic")
         state.appStatus.push({
           key: 'unhandled-error'
         })
@@ -85,6 +87,26 @@ export default {
 
   [types.DATA_YEASTS](state, yeasts) {
     state.data.yeasts = yeasts
+  },
+
+  [types.GOOGLE_SUPPORTED](state, supported) {
+    Vue.set(state.auth, 'google', supported)
+  },
+
+  [types.TWITTER_SUPPORTED](state, supported) {
+    Vue.set(state.auth, 'twitter', supported)
+  },
+
+  [types.FACEBOOK_SUPPORTED](state, supported) {
+    Vue.set(state.auth, 'facebook', supported)
+  },
+
+  [types.GITHUB_SUPPORTED](state, supported) {
+    Vue.set(state.auth, 'github', supported)
+  },
+
+  [types.LINKEDIN_SUPPORTED](state, supported) {
+    Vue.set(state.auth, 'linkedin', supported)
   },
 
 }

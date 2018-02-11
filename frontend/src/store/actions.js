@@ -9,15 +9,72 @@ export const login = (_, be) => {
 export const logout = actionGet('/api/user', 'Logout', types.LOGOUT)
 
 export const updateMetadata = ({ commit }) => {
-  axios.get('/api/user/metadata')
+  axios.get('/auth/authenticated')
     .then(res => {
-      commit(types.LOGIN, res.data.user)
+      if (res.data.authenticated) {
+        axios.get('/api/user/metadata')
+          .then(res => {
+            commit(types.LOGIN, res.data.user)
+          })
+          .catch(err => {
+            commit(types.APP_STATUS, {
+              error: err,
+            })
+          })
+      }
     })
     .catch(err => {
       commit(types.APP_STATUS, {
-        message: err,
+        error: err,
       })
     })
+
+  axios.get('/auth/google/supported')
+    .then(res => {
+      commit(types.GOOGLE_SUPPORTED, res.data.supported)
+    })
+    .catch(err => {
+      commit(types.APP_STATUS, {
+        error: err,
+      })
+    })
+  axios.get('/auth/twitter/supported')
+    .then(res => {
+      commit(types.TWITTER_SUPPORTED, res.data.supported)
+    })
+    .catch(err => {
+      commit(types.APP_STATUS, {
+        error: err,
+      })
+    })
+  axios.get('/auth/facebook/supported')
+    .then(res => {
+      commit(types.FACEBOOK_SUPPORTED, res.data.supported)
+    })
+    .catch(err => {
+      commit(types.APP_STATUS, {
+        error: err,
+      })
+    })
+  axios.get('/auth/github/supported')
+    .then(res => {
+      commit(types.GITHUB_SUPPORTED, res.data.supported)
+    })
+    .catch(err => {
+      commit(types.APP_STATUS, {
+        error: err,
+      })
+    })
+  axios.get('/auth/linkedin/supported')
+    .then(res => {
+      commit(types.LINKEDIN_SUPPORTED, res.data.supported)
+    })
+    .catch(err => {
+      commit(types.APP_STATUS, {
+        error: err,
+      })
+    })
+
 }
 
 export const getUserSettings = actionGet('/api/user', 'Settings', types.USER_SETTINGS)

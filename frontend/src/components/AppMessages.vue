@@ -30,7 +30,7 @@ export default {
     ...mapGetters(['appStatus']),
     snackColor() {
       const hasError = this.appStatus.find(m => {
-        return m.path ? true : false
+        return m.error ? true : false
       })
       return hasError ? 'error' : 'success'
     },

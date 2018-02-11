@@ -36,3 +36,7 @@ export const dataStyles = (state) => {
 export const dataYeasts = (state) => {
   return state.data.yeasts
 }
+
+export const supportedAuth = (state) => {
+  return state.auth
+}
