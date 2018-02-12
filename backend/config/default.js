@@ -1,6 +1,7 @@
 module.exports = {
   port: 3000,
   ip: 'localhost',
+  publicPath: 'public',
   app: {
     title: 'Brew o Matic',
     version: '1.0-SNAPSHOT',

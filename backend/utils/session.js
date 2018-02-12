@@ -13,7 +13,7 @@ module.exports = {
   },
   logout(req, res) {
     req.logout()
-    req.session.destroy(e => {
+    req.session.destroy((e) => {
       if (e) {
         logger.error('Error when session was destroyed!', e)
       }

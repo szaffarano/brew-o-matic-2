@@ -8,7 +8,6 @@ const Style = require('../domain/style')
 const Yeast = require('../domain/yeast')
 
 const logger = require('../utils/logger')
-const config = require('config')
 
 const customIds = [Bottle]
 const models = [Bottle, Grain, Hop, Misc, Style, Yeast]
@@ -16,7 +15,7 @@ const { handleBusinessError } = require('./utils')
 
 const services = {}
 
-models.forEach(m => {
+models.forEach((m) => {
   logger.debug(`Creating services for '${m.modelName}' model`)
   services[m.modelName] = createService(m)
 })

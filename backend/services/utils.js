@@ -8,7 +8,7 @@ module.exports = {
     let errorCode = 400
     if (Object.keys(err).includes('errors')) {
       // get mongoose error list and make a json response
-      Object.values(err.errors).forEach(e => {
+      Object.values(err.errors).forEach((e) => {
         errors.push({
           kind: `mongoose-${e.kind}`,
           path: e.path,

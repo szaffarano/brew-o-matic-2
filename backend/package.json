@@ -1,13 +1,14 @@
 {
   "name": "bom-backend",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "license": "MIT",
   "main": "app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --inspect",
+    "lint": "eslint . || true",
     "start": "cross-env NODE_ENV=production node app.js",
-    "build": "webpack --progress --colors --config build/webpack.config.js"
+    "build": "eslint . && pkg . --no-bytecode --out-path dist --permissive"
   },
   "bin": "app.js",
   "dependencies": {
@@ -50,9 +51,24 @@
     "eslint": "^4.13.0",
     "eslint-plugin-node": "^5.2.1",
     "nodemon": "^1.13.2",
+    "pkg": "^4.3.0",
     "webpack": "^3.10.0"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=9.0.0"
+  },
+  "pkg": {
+    "scripts": [],
+    "ignore": [
+      "cadorna"
+    ],
+    "assets": [
+      "public/favicon.ico"
+    ],
+    "targets": [
+      "node9-linux-x64",
+      "node9-armv7",
+      "node9-windows-x64"
+    ]
   }
 }

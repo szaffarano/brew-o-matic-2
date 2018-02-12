@@ -62,7 +62,7 @@ module.exports = {
     req.ability.throwUnlessCan('read', 'Settings')
     let metadata = {}
 
-    User.schema.eachPath(name => {
+    User.schema.eachPath((name) => {
       if (name.match(/^settings\.defaultValues/)) {
         const path = User.schema.path(name)
         const key = name.replace(/^settings\.defaultValues\./, '')

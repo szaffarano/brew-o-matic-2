@@ -82,7 +82,7 @@ app.use(abilities)
 app.use('/api', api)
 app.use('/auth', authentication)
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(config.publicPath))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

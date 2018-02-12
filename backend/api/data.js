@@ -5,7 +5,7 @@ const router = express.Router();
 const sessionUtils = require('../utils/session')
 const dataServices = require('../services/data')
 
-Object.entries(dataServices).forEach(e => {
+Object.entries(dataServices).forEach((e) => {
   const name = e[0].toLowerCase()
   const services = e[1]
 
