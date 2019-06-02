@@ -12,7 +12,7 @@ import messages from './i18n'
 
 import 'vuetify/dist/vuetify.css'
 import 'font-awesome/css/font-awesome.css'
-import 'mdi/css/materialdesignicons.css'
+import '@mdi/font/css/materialdesignicons.css'
 
 import AppMessages from './components/AppMessages'
 

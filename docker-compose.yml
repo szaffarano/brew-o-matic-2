@@ -24,7 +24,7 @@ services:
     depends_on:
       - mongo
     volumes:
-      - /tmp/config.js:/usr/src/app/config.js
+      - ./config-produ.js:/usr/src/app/config/production.js
 
 networks:
   frontend:
