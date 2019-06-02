@@ -39,7 +39,6 @@ module.exports = {
   db: {
     uri: 'DB_URI',
     options: {
-      useMongoClient: 'DB_OPTIONS_USE_MONGO_CLIENT'
     },
     debug: 'DB_DEBUG'
   },

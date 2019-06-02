@@ -1,17 +1,18 @@
-const winston = require('winston')
+const { createLogger, format, transports } = require('winston');
 
 const config = require('config')
-const transports = []
+const transps = []
 
-transports.push(new winston.transports.Console({
+transps.push(new transports.Console({
   level: config.logging.console.level,
   colorize: true,
   prettyPrint: true,
   handleExceptions: process.env.NODE_ENV === 'production'
 }))
 
-module.exports = new winston.Logger({
+module.exports = new createLogger({
   level: 'debug',
-  transports: transports,
+  format: format.simple(),
+  transports: transps,
   exitOnError: false
 })

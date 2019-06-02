@@ -16,7 +16,7 @@ mongoose.Promise = global.Promise
 if (mongoose.connection.readyState !== 1) {
   logger.info(chalk.green.bold(`Connecting to Mongo ${config.db.uri}...`))
 
-  db = mongoose.connect(config.db.uri, config.db.options,
+  db = mongoose.createConnection(config.db.uri, config.db.options,
     function mongoAfterConnect(err) {
       if (err) {
         logger.info(chalk.red.bold('Could not connect to MongoDB!'))

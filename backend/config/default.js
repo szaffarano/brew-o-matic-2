@@ -45,7 +45,7 @@ module.exports = {
   db: {
     uri: process.env.MONGO_URI || 'mongodb://localhost/bom2-dev',
     options: {
-      useMongoClient: true
+       useNewUrlParser: true
     },
     debug: true
   },
