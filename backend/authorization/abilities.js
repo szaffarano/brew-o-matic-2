@@ -1,7 +1,7 @@
 'use strict'
 
 /* jshint ignore:start */
-const { AbilityBuilder, Ability } = require('casl')
+const { AbilityBuilder, Ability } = require('@casl/ability')
 
 const ANONYMOUS = defineAbilitiesFor(null)
 
